@@ -39,7 +39,31 @@ class DragonSecret {
         return .Male
     }
     
-    init(id: String) {
-        self.id = id
+    init?(id: String) {
+        if (DragonSecret.check(id: id)) {
+            self.id = id
+        } else {
+            return nil
+        }
+    }
+    
+    static func check(id: String) -> Bool {
+        return regexCheck(id) && addressCheck(id) && birthdayCheck(id) && lastCheck(id)
+    }
+    
+    static private func regexCheck(_ id: String) -> Bool {
+        return true
+    }
+    
+    static private func addressCheck(_ id: String) -> Bool {
+        return true
+    }
+    
+    static private func birthdayCheck(_ id: String) -> Bool {
+        return true
+    }
+    
+    static private func lastCheck(_ id: String) -> Bool {
+        return true
     }
 }
