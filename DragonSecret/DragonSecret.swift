@@ -8,38 +8,41 @@
 
 import Foundation
 
-enum Gender {
-    case Male, Female
+public enum Gender {
+    case Male, Female, Unknown
 }
 
-class DragonSecret {
-    var id: String
+public class DragonSecret {
+    public var id: String
     
-    var province: String {
+    public var province: String {
         return "PROVINCE"
     }
     
-    var city: String {
+    public var city: String {
         return "CITY"
     }
     
-    var district: String {
+    public var district: String {
         return "DISTRICT"
     }
     
-    var address: String {
+    public var address: String {
         return province + city + district
     }
     
-    var birthday: Date {
+    public var birthday: Date {
         return Date()
     }
     
-    var gender: Gender {
-        return .Male
+    public var gender: Gender {
+        if let genderChar = id.dropLast().last, let genderNumber = genderChar.wholeNumberValue {
+            return (genderNumber % 2 == 0) ? .Female : .Male
+        }
+        return .Unknown
     }
     
-    init?(id: String) {
+    public init?(id: String) {
         if (DragonSecret.check(id: id)) {
             self.id = id
         } else {
@@ -47,23 +50,23 @@ class DragonSecret {
         }
     }
     
-    static func check(id: String) -> Bool {
+    public static func check(id: String) -> Bool {
         return regexCheck(id) && addressCheck(id) && birthdayCheck(id) && lastCheck(id)
     }
     
-    static private func regexCheck(_ id: String) -> Bool {
+    private static func regexCheck(_ id: String) -> Bool {
         return true
     }
     
-    static private func addressCheck(_ id: String) -> Bool {
+    private static func addressCheck(_ id: String) -> Bool {
         return true
     }
     
-    static private func birthdayCheck(_ id: String) -> Bool {
+    private static func birthdayCheck(_ id: String) -> Bool {
         return true
     }
     
-    static private func lastCheck(_ id: String) -> Bool {
+    private static func lastCheck(_ id: String) -> Bool {
         return true
     }
 }
