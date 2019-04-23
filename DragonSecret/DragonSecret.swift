@@ -32,7 +32,16 @@ public class DragonSecret {
     }
     
     public var birthday: Date {
-        return Date()
+        let startIndex = id.index(id.startIndex, offsetBy: 6)
+        let endIndex = id.index(startIndex, offsetBy: 8)
+        let birthdayString = id[startIndex..<endIndex]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYYMMDD"
+        if let date = dateFormatter.date(from: String(birthdayString)) {
+            return date
+        } else {
+            return Date()
+        }
     }
     
     public var gender: Gender {

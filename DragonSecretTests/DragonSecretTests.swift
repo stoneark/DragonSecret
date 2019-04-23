@@ -19,7 +19,7 @@ class DragonSecretTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func checkValidTest() {
+    func testCheckValid() {
         // Valid
         XCTAssert(DragonSecret.check(id: "110101199001011237") == true)
         // Valid with character x
@@ -36,6 +36,15 @@ class DragonSecretTests: XCTestCase {
         XCTAssert(DragonSecret.check(id: "110101199012351237") == false)
         // Invalid last check number
         XCTAssert(DragonSecret.check(id: "110101199001011230") == false)
+    }
+    
+    func testBirthday() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYYMMDD"
+        
+        if let dragon = DragonSecret(id: "110101199001011237"), let correctDate = dateFormatter.date(from: "19900101") {
+            XCTAssert(dragon.birthday.compare(correctDate) == .orderedSame)
+        }
     }
 
 }
