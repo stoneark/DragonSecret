@@ -32,16 +32,7 @@ public class DragonSecret {
     }
     
     public var birthday: Date {
-        let startIndex = id.index(id.startIndex, offsetBy: 6)
-        let endIndex = id.index(startIndex, offsetBy: 8)
-        let birthdayString = id[startIndex..<endIndex]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYYMMDD"
-        if let date = dateFormatter.date(from: String(birthdayString)) {
-            return date
-        } else {
-            return Date()
-        }
+        return DragonSecret.getBirthday(id: id) ?? Date()
     }
     
     public var gender: Gender {
@@ -59,12 +50,29 @@ public class DragonSecret {
         }
     }
     
+    public static func getBirthday(id: String) -> Date? {
+        let startIndex = id.index(id.startIndex, offsetBy: 6)
+        let endIndex = id.index(startIndex, offsetBy: 8)
+        let birthdayString = id[startIndex..<endIndex]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        if let date = dateFormatter.date(from: String(birthdayString)) {
+            return date
+        } else {
+            return nil
+        }
+    }
+    
     public static func check(id: String) -> Bool {
         return regexCheck(id) && addressCheck(id) && birthdayCheck(id) && lastCheck(id)
     }
     
     private static func regexCheck(_ id: String) -> Bool {
-        return true
+        guard id.count == 18 else {
+            return false
+        }
+        let rangeOfRegex = id.range(of: #"\d{17}(\d|X|x)"#, options:.regularExpression)
+        return rangeOfRegex != nil
     }
     
     private static func addressCheck(_ id: String) -> Bool {
@@ -72,7 +80,7 @@ public class DragonSecret {
     }
     
     private static func birthdayCheck(_ id: String) -> Bool {
-        return true
+        return DragonSecret.getBirthday(id: id) != nil
     }
     
     private static func lastCheck(_ id: String) -> Bool {
