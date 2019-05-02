@@ -46,5 +46,32 @@ class DragonSecretTests: XCTestCase {
             XCTAssert(dragon.birthday.compare(correctDate) == .orderedSame)
         }
     }
+    
+    func testProvince() {
+        if let dragon = DragonSecret(id: "370902199001011235") {
+            XCTAssert(dragon.province == "山东省")
+        }
+    }
+    
+    func testCity() {
+        if let dragon = DragonSecret(id: "370902199001011235") {
+            XCTAssert(dragon.city == "泰安市")
+        }
+    }
+    
+    func testDistrict() {
+        if let dragon = DragonSecret(id: "370902199001011235") {
+            XCTAssert(dragon.district == "泰山区")
+        }
+    }
+    
+    func testAddress() {
+        if let dragon = DragonSecret(id: "370103199001011238") {
+            XCTAssert(dragon.address == "山东省济南市市中区")
+        }
+        if let dragon = DragonSecret(id: "110105199001011232") {
+            XCTAssert(dragon.address == "北京市朝阳区")
+        }
+    }
 
 }

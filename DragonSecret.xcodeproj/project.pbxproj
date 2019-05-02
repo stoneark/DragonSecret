@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A24CFE5227AD6CD00C0DB31 /* gbt2260.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A24CFE4227AD6CD00C0DB31 /* gbt2260.json */; };
 		9A6F1C12226B1027008860DE /* DragonSecret.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6F1C08226B1027008860DE /* DragonSecret.framework */; };
 		9A6F1C17226B1027008860DE /* DragonSecretTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6F1C16226B1027008860DE /* DragonSecretTests.swift */; };
 		9A6F1C19226B1027008860DE /* DragonSecret.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A6F1C0B226B1027008860DE /* DragonSecret.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,6 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A24CFE4227AD6CD00C0DB31 /* gbt2260.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gbt2260.json; sourceTree = "<group>"; };
 		9A6F1C08226B1027008860DE /* DragonSecret.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DragonSecret.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6F1C0B226B1027008860DE /* DragonSecret.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragonSecret.h; sourceTree = "<group>"; };
 		9A6F1C0C226B1027008860DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A24CFE3227AD6A400C0DB31 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9A24CFE4227AD6CD00C0DB31 /* gbt2260.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		9A6F1BFE226B1027008860DE = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +83,7 @@
 		9A6F1C0A226B1027008860DE /* DragonSecret */ = {
 			isa = PBXGroup;
 			children = (
+				9A24CFE3227AD6A400C0DB31 /* Resources */,
 				9A6F1C22226B103A008860DE /* DragonSecret.swift */,
 				9A6F1C0B226B1027008860DE /* DragonSecret.h */,
 				9A6F1C0C226B1027008860DE /* Info.plist */,
@@ -181,6 +192,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A24CFE5227AD6CD00C0DB31 /* gbt2260.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

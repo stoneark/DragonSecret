@@ -16,15 +16,15 @@ public class DragonSecret {
     public var id: String
     
     public var province: String {
-        return "PROVINCE"
+        return DragonSecret.getProvince(id: id) ?? ""
     }
     
     public var city: String {
-        return "CITY"
+        return DragonSecret.getCity(id: id) ?? ""
     }
     
     public var district: String {
-        return "DISTRICT"
+        return DragonSecret.getDistrict(id: id) ?? ""
     }
     
     public var address: String {
@@ -49,8 +49,10 @@ public class DragonSecret {
             return nil
         }
     }
-    
-    public static func getBirthday(id: String) -> Date? {
+
+    private static var addressData: [String: String]?
+
+    private static func getBirthday(id: String) -> Date? {
         let startIndex = id.index(id.startIndex, offsetBy: 6)
         let endIndex = id.index(startIndex, offsetBy: 8)
         let birthdayString = id[startIndex..<endIndex]
@@ -61,6 +63,54 @@ public class DragonSecret {
         } else {
             return nil
         }
+    }
+    
+    private static func getAddressData() -> [String: String]? {
+        if let data = DragonSecret.addressData {
+            return data
+        }
+        guard let bundle = Bundle.init(identifier: "org.stoneark.DragonSecret"),
+            let dataUrl = bundle.url(forResource: "gbt2260", withExtension: "json") else {
+                return nil
+        }
+        do {
+            return try JSONSerialization.jsonObject(with: Data(contentsOf: dataUrl), options: .allowFragments) as? [String: String]
+        } catch {
+            return nil
+        }
+    }
+    
+    private static func getProvince(id: String) -> String? {
+        let startIndex = id.startIndex
+        let endIndex = id.index(startIndex, offsetBy: 2)
+        let subString = id[startIndex..<endIndex]
+        
+        guard let data = DragonSecret.getAddressData() else {
+            return nil
+        }
+        return data[subString + "0000"]
+    }
+    
+    private static func getCity(id: String) -> String? {
+        let startIndex = id.startIndex
+        let endIndex = id.index(startIndex, offsetBy: 4)
+        let subString = id[startIndex..<endIndex]
+        
+        guard let data = DragonSecret.getAddressData() else {
+            return nil
+        }
+        return data[subString + "00"]
+    }
+    
+    private static func getDistrict(id: String) -> String? {
+        let startIndex = id.startIndex
+        let endIndex = id.index(startIndex, offsetBy: 6)
+        let subString = id[startIndex..<endIndex]
+        
+        guard let data = DragonSecret.getAddressData() else {
+            return nil
+        }
+        return data[String(subString)]
     }
     
     public static func check(id: String) -> Bool {
@@ -76,7 +126,7 @@ public class DragonSecret {
     }
     
     private static func addressCheck(_ id: String) -> Bool {
-        return true
+        return getProvince(id: id) != nil || getCity(id: id) != nil || getDistrict(id: id) != nil
     }
     
     private static func birthdayCheck(_ id: String) -> Bool {
