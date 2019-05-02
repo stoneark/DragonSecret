@@ -84,6 +84,13 @@ public class DragonSecret {
     }
     
     private static func lastCheck(_ id: String) -> Bool {
-        return true
+        let weight = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1]
+        var sigma = id.dropLast().enumerated().reduce(0, {$0 + $1.element.wholeNumberValue! * weight[$1.offset]})
+        if let checksum = id.last?.wholeNumberValue {
+            sigma = sigma + checksum
+        } else {
+            sigma = sigma + 10
+        }
+        return sigma % 11 == 1
     }
 }
